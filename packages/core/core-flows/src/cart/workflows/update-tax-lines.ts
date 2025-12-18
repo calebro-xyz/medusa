@@ -17,6 +17,7 @@ const cartFields = [
   "id",
   "currency_code",
   "email",
+  "locale",
   "region.id",
   "region.automatic_taxes",
   "items.id",

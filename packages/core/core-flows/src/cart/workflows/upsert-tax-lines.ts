@@ -15,6 +15,7 @@ import { upsertTaxLinesForItemsStep } from "../steps/upsert-tax-lines-for-items"
 
 const cartFields = [
   "id",
+  "locale",
   "currency_code",
   "email",
   "region.id",
