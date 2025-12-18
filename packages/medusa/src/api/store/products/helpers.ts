@@ -5,7 +5,12 @@ import {
   MedusaContainer,
   TaxableItemDTO,
 } from "@medusajs/framework/types"
-import { calculateAmountsWithTax, Modules } from "@medusajs/framework/utils"
+import {
+  applyTranslationsToTaxLines,
+  calculateAmountsWithTax,
+  FeatureFlag,
+  Modules,
+} from "@medusajs/framework/utils"
 import { StoreRequestWithContext } from "../types"
 
 export type RequestWithContext<
@@ -56,10 +61,19 @@ export const wrapProductsWithTaxPrices = async <T>(
 
   const taxService = req.scope.resolve(Modules.TAX)
 
-  const taxRates = (await taxService.getTaxLines(
+  let taxRates = (await taxService.getTaxLines(
     products.map(asTaxItem).flat(),
     req.taxContext.taxLineContext
   )) as unknown as ItemTaxLineDTO[]
+
+  const isTranslationEnabled = FeatureFlag.isFeatureEnabled("translation")
+  if (isTranslationEnabled) {
+    taxRates = (await applyTranslationsToTaxLines(
+      taxRates,
+      req.locale,
+      req.scope
+    )) as ItemTaxLineDTO[]
+  }
 
   const taxRatesMap = new Map<string, ItemTaxLineDTO[]>()
   taxRates.forEach((taxRate) => {
