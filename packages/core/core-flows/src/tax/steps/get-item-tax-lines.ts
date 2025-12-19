@@ -12,13 +12,7 @@ import {
   TaxableShippingDTO,
   TaxCalculationContext,
 } from "@medusajs/framework/types"
-import {
-  applyTranslationsToTaxLines,
-  FeatureFlag,
-  isDefined,
-  MedusaError,
-  Modules,
-} from "@medusajs/framework/utils"
+import { isDefined, MedusaError, Modules } from "@medusajs/framework/utils"
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 
 /**
@@ -204,39 +198,18 @@ export const getItemTaxLinesStep = createStep(
       return new StepResponse(stepResponseData)
     }
 
-    const isTranslationEnabled = FeatureFlag.isFeatureEnabled("translation")
-
     if (items.length) {
-      const itemsTaxLines = (await taxService.getTaxLines(
+      stepResponseData.lineItemTaxLines = (await taxService.getTaxLines(
         normalizeLineItemsForTax(orderOrCart, filteredItems),
         taxContext
       )) as ItemTaxLineDTO[]
-      if (isTranslationEnabled) {
-        stepResponseData.lineItemTaxLines = (await applyTranslationsToTaxLines(
-          itemsTaxLines,
-          orderOrCart.locale,
-          container
-        )) as ItemTaxLineDTO[]
-      } else {
-        stepResponseData.lineItemTaxLines = itemsTaxLines
-      }
     }
 
     if (shippingMethods.length) {
-      const shippingMethodsTaxLines = (await taxService.getTaxLines(
+      stepResponseData.shippingMethodsTaxLines = (await taxService.getTaxLines(
         normalizeLineItemsForShipping(orderOrCart, shippingMethods),
         taxContext
       )) as ShippingTaxLineDTO[]
-      if (isTranslationEnabled) {
-        stepResponseData.shippingMethodsTaxLines =
-          (await applyTranslationsToTaxLines(
-            shippingMethodsTaxLines,
-            orderOrCart.locale,
-            container
-          )) as ShippingTaxLineDTO[]
-      } else {
-        stepResponseData.shippingMethodsTaxLines = shippingMethodsTaxLines
-      }
     }
 
     return new StepResponse(stepResponseData)
