@@ -448,6 +448,134 @@ medusaIntegrationTestRunner({
         })
       })
 
+      describe("POST /admin/draft-orders/:id/edit/shipping-methods (add shipping method to draft order)", () => {
+        it("should translate shipping method tax lines when adding to draft order with locale", async () => {
+          const draftOrder = (
+            await api.post(
+              "/admin/draft-orders",
+              {
+                email: "test@test.com",
+                region_id: region.id,
+                sales_channel_id: salesChannel.id,
+                locale: "fr-FR",
+                shipping_address: {
+                  address_1: "123 Main St",
+                  city: "Anytown",
+                  country_code: "us",
+                  province: "ca",
+                  postal_code: "12345",
+                  first_name: "John",
+                },
+              },
+              adminHeaders
+            )
+          ).data.draft_order
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit`,
+            {},
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit/items`,
+            {
+              items: [{ variant_id: product.variants[0].id, quantity: 1 }],
+            },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit/shipping-methods`,
+            {
+              shipping_option_id: shippingOption.id,
+            },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit/confirm`,
+            {},
+            adminHeaders
+          )
+
+          const updatedDraftOrder = (
+            await api.get(`/admin/draft-orders/${draftOrder.id}`, adminHeaders)
+          ).data.draft_order
+
+          expect(updatedDraftOrder.shipping_methods.length).toBeGreaterThan(0)
+
+          const shippingMethod = updatedDraftOrder.shipping_methods[0]
+          const taxLine = shippingMethod.tax_lines.find(
+            (tl) => tl.code === "CADEFAULT"
+          )
+          expect(taxLine.description).toEqual("Taux par défaut CA")
+        })
+
+        it("should use original tax line description when draft order has no locale", async () => {
+          const draftOrder = (
+            await api.post(
+              "/admin/draft-orders",
+              {
+                email: "test@test.com",
+                region_id: region.id,
+                sales_channel_id: salesChannel.id,
+                shipping_address: {
+                  address_1: "123 Main St",
+                  city: "Anytown",
+                  country_code: "us",
+                  province: "ca",
+                  postal_code: "12345",
+                  first_name: "John",
+                },
+              },
+              adminHeaders
+            )
+          ).data.draft_order
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit`,
+            {},
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit/items`,
+            {
+              items: [{ variant_id: product.variants[0].id, quantity: 1 }],
+            },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit/shipping-methods`,
+            {
+              shipping_option_id: shippingOption.id,
+            },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit/confirm`,
+            {},
+            adminHeaders
+          )
+
+          const updatedDraftOrder = (
+            await api.get(`/admin/draft-orders/${draftOrder.id}`, adminHeaders)
+          ).data.draft_order
+
+          expect(updatedDraftOrder.shipping_methods.length).toBeGreaterThan(0)
+
+          const shippingMethod = updatedDraftOrder.shipping_methods[0]
+          const taxLine = shippingMethod.tax_lines.find(
+            (tl) => tl.code === "CADEFAULT"
+          )
+          expect(taxLine).toBeDefined()
+          expect(taxLine.description).toEqual("CA Default Rate")
+        })
+      })
+
       describe("POST /admin/draft-orders/:id (update draft order locale)", () => {
         it("should re-translate all items when locale is updated", async () => {
           const draftOrder = (
@@ -484,6 +612,14 @@ medusaIntegrationTestRunner({
                 { variant_id: product.variants[0].id, quantity: 1 },
                 { variant_id: product.variants[1].id, quantity: 1 },
               ],
+            },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/draft-orders/${draftOrder.id}/edit/shipping-methods`,
+            {
+              shipping_option_id: shippingOption.id,
             },
             adminHeaders
           )
@@ -555,6 +691,15 @@ medusaIntegrationTestRunner({
           expect(germanMediumTaxLine.description).toEqual(
             "CA Standardsteuersatz"
           )
+
+          expect(updatedDraftOrder.shipping_methods.length).toBeGreaterThan(0)
+
+          const shippingMethod = updatedDraftOrder.shipping_methods[0]
+          const shippingTaxLine = shippingMethod.tax_lines.find(
+            (tl) => tl.code === "CADEFAULT"
+          )
+          expect(shippingTaxLine).toBeDefined()
+          expect(shippingTaxLine.description).toEqual("CA Standardsteuersatz")
         })
       })
     })

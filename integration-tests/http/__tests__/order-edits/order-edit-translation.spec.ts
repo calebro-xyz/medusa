@@ -413,6 +413,80 @@ medusaIntegrationTestRunner({
           expect(taxLine.description).toEqual("CA Default Rate")
         })
       })
+
+      describe("POST /admin/order-edits/:id/shipping-method (add shipping method during order edit)", () => {
+        it("should translate shipping method tax lines when adding to order edit with locale", async () => {
+          const order = await createOrderFromCart("fr-FR")
+
+          await api.post(
+            "/admin/order-edits",
+            { order_id: order.id },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/order-edits/${order.id}/shipping-method`,
+            { shipping_option_id: shippingOption.id },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/order-edits/${order.id}/confirm`,
+            {},
+            adminHeaders
+          )
+
+          const updatedOrder = (
+            await api.get(`/admin/orders/${order.id}`, adminHeaders)
+          ).data.order
+
+          const newShippingMethod = updatedOrder.shipping_methods.find(
+            (sm) => sm.shipping_option_id === shippingOption.id
+          )
+
+          expect(newShippingMethod.tax_lines.length).toBeGreaterThan(0)
+          const taxLine = newShippingMethod.tax_lines.find(
+            (tl) => tl.code === "CADEFAULT"
+          )
+          expect(taxLine.description).toEqual("Taux par défaut CA")
+        })
+
+        it("should use original tax line description when order has no locale", async () => {
+          const order = await createOrderFromCart()
+
+          await api.post(
+            "/admin/order-edits",
+            { order_id: order.id },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/order-edits/${order.id}/shipping-method`,
+            { shipping_option_id: shippingOption.id },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/order-edits/${order.id}/confirm`,
+            {},
+            adminHeaders
+          )
+
+          const updatedOrder = (
+            await api.get(`/admin/orders/${order.id}`, adminHeaders)
+          ).data.order
+
+          const newShippingMethod = updatedOrder.shipping_methods.find(
+            (sm) => sm.shipping_option_id === shippingOption.id
+          )
+
+          expect(newShippingMethod.tax_lines.length).toBeGreaterThan(0)
+          const taxLine = newShippingMethod.tax_lines.find(
+            (tl) => tl.code === "CADEFAULT"
+          )
+          expect(taxLine.description).toEqual("CA Default Rate")
+        })
+      })
     })
   },
 })

@@ -32,6 +32,7 @@ medusaIntegrationTestRunner({
     let region
     let customer
     let shippingOption
+    let outboundShippingOption
     const shippingProviderId = "manual_test-provider"
 
     beforeEach(async () => {
@@ -239,6 +240,38 @@ medusaIntegrationTestRunner({
               },
             ],
             rules: [],
+          },
+          adminHeaders
+        )
+      ).data.shipping_option
+
+      outboundShippingOption = (
+        await api.post(
+          "/admin/shipping-options",
+          {
+            name: "Outbound shipping",
+            service_zone_id: fulfillmentSet.service_zones[0].id,
+            shipping_profile_id: shippingProfile.id,
+            provider_id: shippingProviderId,
+            price_type: "flat",
+            type: {
+              label: "Test type",
+              description: "Test description",
+              code: "test-code",
+            },
+            prices: [
+              {
+                currency_code: "usd",
+                amount: 20,
+              },
+            ],
+            rules: [
+              {
+                operator: "eq",
+                attribute: "is_return",
+                value: "false",
+              },
+            ],
           },
           adminHeaders
         )
@@ -487,6 +520,112 @@ medusaIntegrationTestRunner({
             (tl) => tl.code === "CADEFAULT"
           )
           expect(taxLine).toBeDefined()
+          expect(taxLine.description).toEqual("CA Default Rate")
+        })
+      })
+
+      describe("when adding outbound shipping methods to a claim", () => {
+        it("should translate shipping method tax lines based on order locale", async () => {
+          await api.post(
+            `/admin/orders/${order.id}`,
+            { locale: "fr-FR" },
+            adminHeaders
+          )
+
+          const claim = (
+            await api.post(
+              "/admin/claims",
+              {
+                order_id: order.id,
+                type: ClaimType.REPLACE,
+                description: "Test claim",
+              },
+              adminHeaders
+            )
+          ).data.claim
+
+          await api.post(
+            `/admin/claims/${claim.id}/outbound/items`,
+            {
+              items: [
+                {
+                  variant_id: productExtra.variants[0].id,
+                  quantity: 1,
+                },
+              ],
+            },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/claims/${claim.id}/outbound/shipping-method`,
+            { shipping_option_id: outboundShippingOption.id },
+            adminHeaders
+          )
+
+          await api.post(`/admin/claims/${claim.id}/request`, {}, adminHeaders)
+
+          const updatedOrder = (
+            await api.get(`/admin/orders/${order.id}`, adminHeaders)
+          ).data.order
+
+          const outboundShippingMethod = updatedOrder.shipping_methods.find(
+            (sm) => sm.shipping_option_id === outboundShippingOption.id
+          )
+
+          expect(outboundShippingMethod.tax_lines.length).toBeGreaterThan(0)
+          const taxLine = outboundShippingMethod.tax_lines.find(
+            (tl) => tl.code === "CADEFAULT"
+          )
+          expect(taxLine.description).toEqual("Taux par défaut CA")
+        })
+
+        it("should use original tax line description when order has no locale", async () => {
+          const claim = (
+            await api.post(
+              "/admin/claims",
+              {
+                order_id: order.id,
+                type: ClaimType.REPLACE,
+                description: "Test claim",
+              },
+              adminHeaders
+            )
+          ).data.claim
+
+          await api.post(
+            `/admin/claims/${claim.id}/outbound/items`,
+            {
+              items: [
+                {
+                  variant_id: productExtra.variants[0].id,
+                  quantity: 1,
+                },
+              ],
+            },
+            adminHeaders
+          )
+
+          await api.post(
+            `/admin/claims/${claim.id}/outbound/shipping-method`,
+            { shipping_option_id: outboundShippingOption.id },
+            adminHeaders
+          )
+
+          await api.post(`/admin/claims/${claim.id}/request`, {}, adminHeaders)
+
+          const updatedOrder = (
+            await api.get(`/admin/orders/${order.id}`, adminHeaders)
+          ).data.order
+
+          const outboundShippingMethod = updatedOrder.shipping_methods.find(
+            (sm) => sm.shipping_option_id === outboundShippingOption.id
+          )
+
+          expect(outboundShippingMethod.tax_lines.length).toBeGreaterThan(0)
+          const taxLine = outboundShippingMethod.tax_lines.find(
+            (tl) => tl.code === "CADEFAULT"
+          )
           expect(taxLine.description).toEqual("CA Default Rate")
         })
       })
