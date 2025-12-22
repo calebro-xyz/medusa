@@ -308,6 +308,11 @@ export type MedusaAppOptions = {
    * Forces the modules bootstrapper to only run the modules loaders and return prematurely
    */
   loaderOnly?: boolean
+  /**
+   * Only partially load modules to retrieve their joiner configs without running loaders.
+   * Useful for type generation and migrations.
+   */
+  migrationOnly?: boolean
   cwd?: string
 }
 
@@ -325,9 +330,7 @@ async function MedusaApp_({
   loaderOnly = false,
   workerMode = "shared",
   cwd = process.cwd(),
-}: MedusaAppOptions & {
-  migrationOnly?: boolean
-} = {}): Promise<MedusaAppOutput> {
+}: MedusaAppOptions = {}): Promise<MedusaAppOutput> {
   const sharedContainer_ = createMedusaContainer({}, sharedContainer)
 
   const config = sharedContainer_.resolve(

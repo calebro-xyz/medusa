@@ -83900,59 +83900,59 @@ components:
         original_item_total:
           type: number
           title: original_item_total
-          description: The cart's original item total.
+          description: The sum of all line items' original totals before discounts, including taxes.
         original_item_subtotal:
           type: number
           title: original_item_subtotal
-          description: The cart's original item subtotal.
+          description: The sum of all line items' original subtotals before discounts, excluding taxes.
         original_item_tax_total:
           type: number
           title: original_item_tax_total
-          description: The cart's original item tax total.
+          description: The sum of all line items' original tax totals before discounts.
         item_total:
           type: number
           title: item_total
-          description: The cart's item total.
+          description: The sum of all line items' totals after discounts, including taxes.
         item_subtotal:
           type: number
           title: item_subtotal
-          description: The cart's item subtotal.
+          description: The sum of all line items' subtotals before discounts, excluding taxes.
         item_tax_total:
           type: number
           title: item_tax_total
-          description: The cart's item tax total.
+          description: The sum of all line items' tax totals after discounts.
         original_total:
           type: number
           title: original_total
-          description: The cart's original total.
+          description: The cart's total before discounts, including taxes. Calculated as the sum of `original_item_total` and `original_shipping_total`.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The cart's original subtotal.
+          description: The cart's subtotal before discounts, excluding taxes. Calculated as the sum of `original_item_subtotal` and `original_shipping_subtotal`.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The cart's original tax total.
+          description: The cart's tax total before discounts. Calculated as the sum of `original_item_tax_total` and `original_shipping_tax_total`.
         total:
           type: number
           title: total
-          description: The cart's total.
+          description: The cart's final total after discounts and credit lines, including taxes.
         subtotal:
           type: number
           title: subtotal
-          description: The cart's subtotal.
+          description: The cart's subtotal before discounts, excluding taxes. Calculated as the sum of `item_subtotal` and `shipping_subtotal`.
         tax_total:
           type: number
           title: tax_total
-          description: The cart's tax total.
+          description: The cart's tax total after discounts. Calculated as the sum of `item_tax_total` and `shipping_tax_total`.
         discount_total:
           type: number
           title: discount_total
-          description: The cart's discount total.
+          description: The total amount of discounts applied to the cart, including the tax portion of discounts.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The cart's discount tax total.
+          description: The total amount of discounts applied to the cart's tax. Represents the tax portion of discounts.
         gift_card_total:
           type: number
           title: gift_card_total
@@ -83964,27 +83964,27 @@ components:
         shipping_total:
           type: number
           title: shipping_total
-          description: The cart's shipping total.
+          description: The sum of all shipping methods' totals after discounts, including taxes.
         shipping_subtotal:
           type: number
           title: shipping_subtotal
-          description: The cart's shipping subtotal.
+          description: The sum of all shipping methods' subtotals before discounts, excluding taxes.
         shipping_tax_total:
           type: number
           title: shipping_tax_total
-          description: The cart's shipping tax total.
+          description: The sum of all shipping methods' tax totals after discounts.
         original_shipping_total:
           type: number
           title: original_shipping_total
-          description: The cart's original shipping total.
+          description: The sum of all shipping methods' original totals before discounts, including taxes.
         original_shipping_subtotal:
           type: number
           title: original_shipping_subtotal
-          description: The cart's original shipping subtotal.
+          description: The sum of all shipping methods' original subtotals before discounts, excluding taxes.
         original_shipping_tax_total:
           type: number
           title: original_shipping_tax_total
-          description: The cart's original shipping tax total.
+          description: The sum of all shipping methods' original tax totals before discounts.
     BaseCartAddress:
       type: object
       description: The cart's shipping address.
@@ -84135,47 +84135,47 @@ components:
         original_total:
           type: number
           title: original_total
-          description: The item's original total.
+          description: The line item's original total before discounts, including taxes.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The item's original subtotal.
+          description: The line item's original subtotal before discounts, excluding taxes.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The item's original tax total.
+          description: The line item's original tax total before discounts.
         item_total:
           type: number
           title: item_total
-          description: The item's item total.
+          description: The line item's total after discounts, including taxes.
         item_subtotal:
           type: number
           title: item_subtotal
-          description: The item's item subtotal.
+          description: The line item's subtotal before discounts, excluding taxes.
         item_tax_total:
           type: number
           title: item_tax_total
-          description: The item's item tax total.
+          description: The line item's tax total after discounts.
         total:
           type: number
           title: total
-          description: The item's total.
+          description: The line item's total after discounts, including taxes.
         subtotal:
           type: number
           title: subtotal
-          description: The item's subtotal.
+          description: The line item's subtotal before discounts, excluding taxes.
         tax_total:
           type: number
           title: tax_total
-          description: The item's tax total.
+          description: The line item's tax total after discounts.
         discount_total:
           type: number
           title: discount_total
-          description: The item's discount total.
+          description: The total amount of discounts applied to the line item, including the tax portion of discounts.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The item's discount tax total.
+          description: The total amount of discounts applied to the line item's tax. Represents the tax portion of discounts.
     BaseCartShippingMethod:
       type: object
       description: A cart's shipping method.
@@ -84251,35 +84251,35 @@ components:
         original_total:
           type: number
           title: original_total
-          description: The shipping method's total including taxes, excluding promotions.
+          description: The shipping method's original total before discounts, including taxes.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The shipping method's total excluding taxes, including promotions.
+          description: The shipping method's original subtotal before discounts, excluding taxes.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The total taxes applied on the shipping method's amount including promotions.
+          description: The shipping method's original tax total before discounts.
         total:
           type: number
           title: total
-          description: The shipping method's total amount including taxes and promotions.
+          description: The shipping method's total after discounts, including taxes.
         subtotal:
           type: number
           title: subtotal
-          description: The shipping method's total amount excluding taxes, including promotions.
+          description: The shipping method's subtotal before discounts, excluding taxes.
         tax_total:
           type: number
           title: tax_total
-          description: The total taxes applied on the shipping method's amount including promotions.
+          description: The shipping method's tax total after discounts.
         discount_total:
           type: number
           title: discount_total
-          description: The total amount discounted.
+          description: The total amount of discounts applied to the shipping method, including the tax portion of discounts.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The taxes applied on the discounted amount.
+          description: The total amount of discounts applied to the shipping method's tax. Represents the tax portion of discounts.
     BaseClaimItem:
       type: object
       description: The claim item's details.
@@ -84742,59 +84742,59 @@ components:
         original_item_total:
           type: number
           title: original_item_total
-          description: The total of the order's items including taxes, excluding promotions.
+          description: The sum of all line items' original totals before discounts, including taxes.
         original_item_subtotal:
           type: number
           title: original_item_subtotal
-          description: The total of the order's items excluding taxes, including promotions.
+          description: The sum of all line items' original subtotals before discounts, excluding taxes.
         original_item_tax_total:
           type: number
           title: original_item_tax_total
-          description: The tax total of the order's items excluding promotions.
+          description: The sum of all line items' original tax totals before discounts.
         item_total:
           type: number
           title: item_total
-          description: The total of the order's items including taxes and promotions.
+          description: The sum of all line items' totals after discounts, including taxes.
         item_subtotal:
           type: number
           title: item_subtotal
-          description: The total of the order's items excluding taxes, including promotions.
+          description: The sum of all line items' subtotals before discounts, excluding taxes.
         item_tax_total:
           type: number
           title: item_tax_total
-          description: The tax total of the order's items including promotions.
+          description: The sum of all line items' tax totals after discounts.
         original_total:
           type: number
           title: original_total
-          description: The order's total excluding promotions, including taxes.
+          description: The order's total before discounts, including taxes. Calculated as the sum of `original_item_total` and `original_shipping_total`.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The order's total excluding taxes, including promotions.
+          description: The order's subtotal before discounts, excluding taxes. Calculated as the sum of `original_item_subtotal` and `original_shipping_subtotal`.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The order's tax total, excluding promotions.
+          description: The order's tax total before discounts. Calculated as the sum of `original_item_tax_total` and `original_shipping_tax_total`.
         total:
           type: number
           title: total
-          description: The order's total including taxes and promotions.
+          description: The order's final total after discounts and credit lines, including taxes.
         subtotal:
           type: number
           title: subtotal
-          description: The order's total excluding taxes, including promotions.
+          description: The order's subtotal before discounts, excluding taxes. Calculated as the sum of `item_subtotal` and `shipping_subtotal`.
         tax_total:
           type: number
           title: tax_total
-          description: The order's tax total including promotions.
+          description: The order's tax total after discounts. Calculated as the sum of `item_tax_total` and `shipping_tax_total`.
         discount_total:
           type: number
           title: discount_total
-          description: The order's discount or promotions total.
+          description: The total amount of discounts applied to the order, including the tax portion of discounts.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The tax total of order's discount or promotion.
+          description: The total amount of discounts applied to the order's tax. Represents the tax portion of discounts.
         gift_card_total:
           type: number
           title: gift_card_total
@@ -84806,27 +84806,27 @@ components:
         shipping_total:
           type: number
           title: shipping_total
-          description: The order's shipping total including taxes and promotions.
+          description: The sum of all shipping methods' totals after discounts, including taxes.
         shipping_subtotal:
           type: number
           title: shipping_subtotal
-          description: The order's shipping total excluding taxes, including promotions.
+          description: The sum of all shipping methods' subtotals before discounts, excluding taxes.
         shipping_tax_total:
           type: number
           title: shipping_tax_total
-          description: The tax total of the order's shipping.
+          description: The sum of all shipping methods' tax totals after discounts.
         original_shipping_total:
           type: number
           title: original_shipping_total
-          description: The order's shipping total including taxes, excluding promotions.
+          description: The sum of all shipping methods' original totals before discounts, including taxes.
         original_shipping_subtotal:
           type: number
           title: original_shipping_subtotal
-          description: The order's shipping total excluding taxes, including promotions.
+          description: The sum of all shipping methods' original subtotals before discounts, excluding taxes.
         original_shipping_tax_total:
           type: number
           title: original_shipping_tax_total
-          description: The tax total of the order's shipping excluding promotions.
+          description: The sum of all shipping methods' original tax totals before discounts.
         status:
           type: string
           title: status
@@ -84834,15 +84834,15 @@ components:
         credit_line_total:
           type: number
           title: credit_line_total
-          description: The order's credit line total.
+          description: The total amount of credit lines applied to the order, including taxes. Subtracted from the final total.
         item_discount_total:
           type: number
           title: item_discount_total
-          description: The total discount amount applied on the order's items.
+          description: The sum of all discounts applied to line items, including the tax portion of discounts.
         shipping_discount_total:
           type: number
           title: shipping_discount_total
-          description: The total discount amount applied on the order's shipping.
+          description: The sum of all discounts applied to shipping methods, including the tax portion of discounts.
         custom_display_id:
           type: string
           title: custom_display_id
@@ -85253,47 +85253,47 @@ components:
         original_total:
           type: number
           title: original_total
-          description: The item's total including taxes, excluding promotions.
+          description: The line item's original total before discounts, including taxes.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The item's total excluding taxes, including promotions.
+          description: The line item's original subtotal before discounts, excluding taxes.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The total taxes of the item, excluding promotions.
+          description: The line item's original tax total before discounts.
         item_total:
           type: number
           title: item_total
-          description: The total taxes of the item, including promotions.
+          description: The line item's total after discounts, including taxes.
         item_subtotal:
           type: number
           title: item_subtotal
-          description: The item's total excluding taxes, including promotions.
+          description: The line item's subtotal before discounts, excluding taxes.
         item_tax_total:
           type: number
           title: item_tax_total
-          description: The total taxes of the item, including promotions.
+          description: The line item's tax total after discounts.
         total:
           type: number
           title: total
-          description: The item's total, including taxes and promotions.
+          description: The line item's total after discounts, including taxes.
         subtotal:
           type: number
           title: subtotal
-          description: The item's subtotal excluding taxes, including promotions.
+          description: The line item's subtotal before discounts, excluding taxes.
         tax_total:
           type: number
           title: tax_total
-          description: The tax total of the item including promotions.
+          description: The line item's tax total after discounts.
         discount_total:
           type: number
           title: discount_total
-          description: The total discount amount of the item.
+          description: The total amount of discounts applied to the line item, including the tax portion of discounts.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The total taxes applied on the discounted amount.
+          description: The total amount of discounts applied to the line item's tax. Represents the tax portion of discounts.
         refundable_total:
           type: number
           title: refundable_total
@@ -89691,59 +89691,59 @@ components:
         original_item_total:
           type: number
           title: original_item_total
-          description: The cart items' total including taxes, excluding promotions.
+          description: The sum of all line items' original totals before discounts, including taxes.
         original_item_subtotal:
           type: number
           title: original_item_subtotal
-          description: The cart items' total excluding taxes, including promotions.
+          description: The sum of all line items' original subtotals before discounts, excluding taxes.
         original_item_tax_total:
           type: number
           title: original_item_tax_total
-          description: The cart items' tax total excluding promotions.
+          description: The sum of all line items' original tax totals before discounts.
         item_total:
           type: number
           title: item_total
-          description: The cart items' total including taxes and promotions.
+          description: The sum of all line items' totals after discounts, including taxes.
         item_subtotal:
           type: number
           title: item_subtotal
-          description: The cart items' total excluding taxes, including promotions.
+          description: The sum of all line items' subtotals before discounts, excluding taxes.
         item_tax_total:
           type: number
           title: item_tax_total
-          description: The cart items' tax total including promotions.
+          description: The sum of all line items' tax totals after discounts.
         original_total:
           type: number
           title: original_total
-          description: The cart's total including taxes, excluding promotions.
+          description: The cart's total before discounts, including taxes. Calculated as the sum of `original_item_total` and `original_shipping_total`.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The cart's total excluding taxes, including promotions.
+          description: The cart's subtotal before discounts, excluding taxes. Calculated as the sum of `original_item_subtotal` and `original_shipping_subtotal`.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The cart's tax total excluding promotions.
+          description: The cart's tax total before discounts. Calculated as the sum of `original_item_tax_total` and `original_shipping_tax_total`.
         total:
           type: number
           title: total
-          description: The cart's total including taxes and promotions.
+          description: The cart's final total after discounts and credit lines, including taxes.
         subtotal:
           type: number
           title: subtotal
-          description: The cart's total excluding taxes, including promotions.
+          description: The cart's subtotal before discounts, excluding taxes. Calculated as the sum of `item_subtotal` and `shipping_subtotal`.
         tax_total:
           type: number
           title: tax_total
-          description: The cart's tax total including promotions.
+          description: The cart's tax total after discounts. Calculated as the sum of `item_tax_total` and `shipping_tax_total`.
         discount_total:
           type: number
           title: discount_total
-          description: The cart's discount total.
+          description: The total amount of discounts applied to the cart, including the tax portion of discounts.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The tax total applied on the discounted amount.
+          description: The total amount of discounts applied to the cart's tax. Represents the tax portion of discounts.
         gift_card_total:
           type: number
           title: gift_card_total
@@ -89755,27 +89755,27 @@ components:
         shipping_total:
           type: number
           title: shipping_total
-          description: The cart's shipping total including taxes and promotions.
+          description: The sum of all shipping methods' totals after discounts, including taxes.
         shipping_subtotal:
           type: number
           title: shipping_subtotal
-          description: The cart's shipping total excluding taxes, including promotions.
+          description: The sum of all shipping methods' subtotals before discounts, excluding taxes.
         shipping_tax_total:
           type: number
           title: shipping_tax_total
-          description: The total taxes applied on the cart's shipping amount.
+          description: The sum of all shipping methods' tax totals after discounts.
         original_shipping_total:
           type: number
           title: original_shipping_total
-          description: The cart's shipping total including taxes, excluding promotions.
+          description: The sum of all shipping methods' original totals before discounts, including taxes.
         original_shipping_subtotal:
           type: number
           title: original_shipping_subtotal
-          description: The cart's shipping total excluding taxes, including promotions.
+          description: The sum of all shipping methods' original subtotals before discounts, excluding taxes.
         original_shipping_tax_total:
           type: number
           title: original_shipping_tax_total
-          description: The total taxes applied on the cart's shipping amount.
+          description: The sum of all shipping methods' original tax totals before discounts.
         promotions:
           type: array
           description: The cart's promotions.
@@ -90163,47 +90163,47 @@ components:
         original_total:
           type: number
           title: original_total
-          description: The item's total including taxes, excluding promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The line item's original total before discounts, including taxes. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The item's total excluding taxes, including promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The line item's original subtotal before discounts, excluding taxes. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The total taxes of the item excluding promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The line item's original tax total before discounts. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         item_total:
           type: number
-          title: original_tax_total
-          description: The item's total including taxes and promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          title: item_total
+          description: The line item's total after discounts, including taxes. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         item_subtotal:
           type: number
           title: item_subtotal
-          description: The item's total excluding taxes, including promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The line item's subtotal before discounts, excluding taxes. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         item_tax_total:
           type: number
           title: item_tax_total
-          description: The total taxes of the item including promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The line item's tax total after discounts. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         total:
           type: number
           title: total
-          description: The item's total including taxes and promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The line item's total after discounts, including taxes. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         subtotal:
           type: number
           title: subtotal
-          description: The item's total excluding taxes, including promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The line item's subtotal before discounts, excluding taxes. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         tax_total:
           type: number
           title: tax_total
-          description: The total taxes of the item including promotions. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The line item's tax total after discounts. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         discount_total:
           type: number
           title: discount_total
-          description: The total discount of the item. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The total amount of discounts applied to the line item, including the tax portion of discounts. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The total taxes applied on the discounted amount. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
+          description: The total amount of discounts applied to the line item's tax. Represents the tax portion of discounts. This field is only available if you expand the `items.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-cart-item-totals) guide.
     StoreCartPromotion:
       type: object
       description: The promotion's promotions.
@@ -90481,35 +90481,35 @@ components:
         original_total:
           type: number
           title: original_total
-          description: The shipping method's total including taxes, excluding promotions. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
+          description: The shipping method's original total before discounts, including taxes. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The shipping method's total excluding taxes, including promotions. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
+          description: The shipping method's original subtotal before discounts, excluding taxes. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The total taxes applied on the shipping method's amount including promotions. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
+          description: The shipping method's original tax total before discounts. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
         total:
           type: number
           title: total
-          description: The shipping method's total amount including taxes and promotions. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
+          description: The shipping method's total after discounts, including taxes. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
         subtotal:
           type: number
           title: subtotal
-          description: The shipping method's total amount excluding taxes, including promotions. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
+          description: The shipping method's subtotal before discounts, excluding taxes. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
         tax_total:
           type: number
           title: tax_total
-          description: The total taxes applied on the shipping method's amount including promotions. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
+          description: The shipping method's tax total after discounts. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
         discount_total:
           type: number
           title: discount_total
-          description: The total amount discounted. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
+          description: The total amount of discounts applied to the shipping method, including the tax portion of discounts. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The taxes applied on the discounted amount. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
+          description: The total amount of discounts applied to the shipping method's tax. Represents the tax portion of discounts. This field is only available if you expand the `shipping_methods.*` relation. Learn more in the [Cart Totals](https://docs.medusajs.com/resources/storefront-development/cart/totals#retrieve-and-show-shipping-method-totals) guide.
     StoreCartShippingOption:
       type: object
       description: The shipping option's details.
@@ -91509,59 +91509,59 @@ components:
         original_item_total:
           type: number
           title: original_item_total
-          description: The order items' total including taxes, excluding promotions.
+          description: The sum of all line items' original totals before discounts, including taxes.
         original_item_subtotal:
           type: number
           title: original_item_subtotal
-          description: The order items' total excluding taxes, including promotions.
+          description: The sum of all line items' original subtotals before discounts, excluding taxes.
         original_item_tax_total:
           type: number
           title: original_item_tax_total
-          description: The total taxes applied on the order items, excluding promotions.
+          description: The sum of all line items' original tax totals before discounts.
         item_total:
           type: number
           title: item_total
-          description: The order items' total including taxes and promotions.
+          description: The sum of all line items' totals after discounts, including taxes.
         item_subtotal:
           type: number
           title: item_subtotal
-          description: The order items' total excluding taxes, including promotions.
+          description: The sum of all line items' subtotals before discounts, excluding taxes.
         item_tax_total:
           type: number
           title: item_tax_total
-          description: The total taxes applied on the order's items, including promotions.
+          description: The sum of all line items' tax totals after discounts.
         original_total:
           type: number
           title: original_total
-          description: The order's total including taxes, excluding promotions.
+          description: The order's total before discounts, including taxes. Calculated as the sum of `original_item_total` and `original_shipping_total`.
         original_subtotal:
           type: number
           title: original_subtotal
-          description: The order's total excluding taxes, including promotions.
+          description: The order's subtotal before discounts, excluding taxes. Calculated as the sum of `original_item_subtotal` and `original_shipping_subtotal`.
         original_tax_total:
           type: number
           title: original_tax_total
-          description: The total taxes of the order excluding promotions.
+          description: The order's tax total before discounts. Calculated as the sum of `original_item_tax_total` and `original_shipping_tax_total`.
         total:
           type: number
           title: total
-          description: The order's total including taxes and promotions.
+          description: The order's final total after discounts and credit lines, including taxes.
         subtotal:
           type: number
           title: subtotal
-          description: The order's total excluding taxes, including promotions.
+          description: The order's subtotal before discounts, excluding taxes. Calculated as the sum of `item_subtotal` and `shipping_subtotal`.
         tax_total:
           type: number
           title: tax_total
-          description: The tax totals of the order including promotions.
+          description: The order's tax total after discounts. Calculated as the sum of `item_tax_total` and `shipping_tax_total`.
         discount_total:
           type: number
           title: discount_total
-          description: The order's discount total.
+          description: The total amount of discounts applied to the order, including the tax portion of discounts.
         discount_tax_total:
           type: number
           title: discount_tax_total
-          description: The total taxes applied on the discounted amount.
+          description: The total amount of discounts applied to the order's tax. Represents the tax portion of discounts.
         gift_card_total:
           type: number
           title: gift_card_total
@@ -91573,27 +91573,27 @@ components:
         shipping_total:
           type: number
           title: shipping_total
-          description: The order's shipping total including taxes and promotions.
+          description: The sum of all shipping methods' totals after discounts, including taxes.
         shipping_subtotal:
           type: number
           title: shipping_subtotal
-          description: The order's shipping total excluding taxes, including promotions.
+          description: The sum of all shipping methods' subtotals before discounts, excluding taxes.
         shipping_tax_total:
           type: number
           title: shipping_tax_total
-          description: The total taxes of the order's shipping including promotions.
+          description: The sum of all shipping methods' tax totals after discounts.
         original_shipping_total:
           type: number
           title: original_shipping_total
-          description: The order's shipping total including taxes, excluding promotions.
+          description: The sum of all shipping methods' original totals before discounts, including taxes.
         original_shipping_subtotal:
           type: number
           title: original_shipping_subtotal
-          description: The order's shipping total excluding taxes, including promotions.
+          description: The sum of all shipping methods' original subtotals before discounts, excluding taxes.
         original_shipping_tax_total:
           type: number
           title: original_shipping_tax_total
-          description: The total taxes of the order's shipping excluding promotions.
+          description: The sum of all shipping methods' original tax totals before discounts.
         customer:
           $ref: '#/components/schemas/StoreCustomer'
         transactions:
@@ -91608,15 +91608,15 @@ components:
         credit_line_total:
           type: number
           title: credit_line_total
-          description: The order's credit line total.
+          description: The total amount of credit lines applied to the order, including taxes. Subtracted from the final total.
         item_discount_total:
           type: number
           title: item_discount_total
-          description: The total discount amount applied on the order's items.
+          description: The sum of all discounts applied to line items, including the tax portion of discounts.
         shipping_discount_total:
           type: number
           title: shipping_discount_total
-          description: The total discount amount applied on the order's shipping.
+          description: The sum of all discounts applied to shipping methods, including the tax portion of discounts.
         custom_display_id:
           type: string
           title: custom_display_id

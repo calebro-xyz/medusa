@@ -349,11 +349,11 @@ function resolveModules(
           ...(isObject(moduleConfig)
             ? moduleConfig
             : { disable: !moduleConfig }),
-        })
+        } as InputConfigModules[number])
       })
     } else if (Array.isArray(configModules)) {
       const modules_ = (configModules ?? []) as InternalModuleDeclaration[]
-      modules.push(...modules_)
+      modules.push(...(modules_ as InputConfigModules))
     } else {
       throw new Error(
         "Invalid modules configuration. Should be an array or object."

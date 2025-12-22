@@ -77,6 +77,11 @@ export const navDropdownItems: NavigationItem[] = [
         ],
       },
       {
+        type: "link",
+        title: "Admin Extensions",
+        link: "/learn/fundamentals/admin",
+      },
+      {
         type: "sub-menu",
         title: "Commerce Modules",
         link: "/resources/commerce-modules",

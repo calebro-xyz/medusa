@@ -133,7 +133,7 @@ const TypeListItem = ({
     return (
       <DetailsSummary
         subtitle={
-          item.description || item.defaultValue ? (
+          item.description || item.defaultValue || item.example ? (
             <>
               {item.description && (
                 <MarkdownContent
@@ -175,6 +175,11 @@ const TypeListItem = ({
                 <p className="mt-0.5 mb-0">
                   Default: <InlineCode>{item.defaultValue}</InlineCode>
                 </p>
+              )}
+              {item.example && (
+                <div className="mt-0.5">
+                  Example: <InlineCode>{item.example}</InlineCode>
+                </div>
               )}
             </>
           ) : undefined
