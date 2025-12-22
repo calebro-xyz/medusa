@@ -9,6 +9,7 @@ import { Modules, OrderWorkflowEvents } from "@medusajs/framework/utils"
 import {
   createStep,
   createWorkflow,
+  parallelize,
   StepResponse,
   transform,
   when,
@@ -23,6 +24,7 @@ import {
   updateOrderItemsTranslationsStep,
 } from "../../order"
 import { validateDraftOrderStep } from "../steps/validate-draft-order"
+import { updateOrderTaxLinesTranslationsStep } from "../../order/steps/update-order-tax-lines-translations"
 
 export const updateDraftOrderWorkflowId = "update-draft-order"
 
@@ -340,10 +342,16 @@ export const updateDraftOrderWorkflow = createWorkflow(
     when({ input, order }, ({ input, order }) => {
       return !!input.locale && input.locale !== order.locale
     }).then(() => {
-      updateOrderItemsTranslationsStep({
-        order_id: input.id,
-        locale: input.locale!,
-      })
+      parallelize(
+        updateOrderTaxLinesTranslationsStep({
+          order_id: input.id,
+          locale: input.locale!,
+        }),
+        updateOrderItemsTranslationsStep({
+          order_id: input.id,
+          locale: input.locale!,
+        })
+      )
     })
 
     emitEventStep({
