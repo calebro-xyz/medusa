@@ -6,7 +6,7 @@ import {
   StepResponse,
 } from "@medusajs/framework/workflows-sdk"
 import { applyTranslationsToItems } from "../utils/apply-translations-to-items"
-import TranslationFeatureFlag from "../../../../../medusa/src/feature-flags/translation"
+import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 
 export interface GetTranslatedLineItemsStepInput<T> {
   items: T[] | undefined

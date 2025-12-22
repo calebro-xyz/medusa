@@ -5,7 +5,7 @@ import {
   FeatureFlag,
   Modules,
 } from "@medusajs/framework/utils"
-import TranslationFeatureFlag from "../../../../../medusa/src/feature-flags/translation"
+import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 
 export const updateOrderTaxLinesTranslationsStepId =
   "update-order-tax-lines-translations"

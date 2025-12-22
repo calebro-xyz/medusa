@@ -14,7 +14,7 @@ import {
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 import { applyTranslationsToItems } from "../../common/utils/apply-translations-to-items"
 import { productVariantsFields } from "../utils/fields"
-import TranslationFeatureFlag from "../../../../../medusa/src/feature-flags/translation"
+import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 
 export interface UpdateCartItemsTranslationsStepInput {
   cart_id: string

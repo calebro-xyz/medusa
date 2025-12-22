@@ -4,7 +4,7 @@ import {
   FeatureFlag,
 } from "@medusajs/framework/utils"
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
-import TranslationFeatureFlag from "../../../../../medusa/src/feature-flags/translation"
+import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 export const getTranslatedTaxLinesStepId = "get-translated-tax-lines-step"
 
 export interface GetTranslatedTaxLinesStepInput {

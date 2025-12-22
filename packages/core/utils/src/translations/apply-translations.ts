@@ -2,7 +2,7 @@ import { MedusaContainer, RemoteQueryFunction } from "@medusajs/types"
 import { ContainerRegistrationKeys } from "../common/container"
 import { isObject } from "../common/is-object"
 import { FeatureFlag } from "../feature-flags/flag-router"
-import TranslationFeatureFlag from "../../../../medusa/src/feature-flags/translation"
+import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 
 const excludedKeys = [
   "id",

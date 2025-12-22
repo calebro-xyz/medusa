@@ -4,7 +4,7 @@ import {
   MEDUSA_SKIP_FILE,
   Modules,
 } from "@medusajs/framework/utils"
-import TranslationFeatureFlag from "../../../../../medusa/src/feature-flags/translation"
+import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 
 export const ProductTranslation: ModuleJoinerConfig = {
   [MEDUSA_SKIP_FILE]: !(
