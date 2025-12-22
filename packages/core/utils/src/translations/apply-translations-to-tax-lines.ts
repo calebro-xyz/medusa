@@ -39,10 +39,11 @@ export const applyTranslationsToTaxLines = async (
     }
   }
 
-  return taxLines.map((taxLine: ItemTaxLineDTO | ShippingTaxLineDTO) => ({
-    ...taxLine,
-    name: taxLine.rate_id
-      ? rateTranslationMap.get(taxLine.rate_id)
-      : taxLine.name,
-  }))
+  for (const taxLine of taxLines) {
+    if (taxLine.rate_id) {
+      taxLine.name = rateTranslationMap.get(taxLine.rate_id)!
+    }
+  }
+
+  return taxLines
 }
