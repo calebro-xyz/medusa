@@ -4,10 +4,10 @@ import {
   MEDUSA_SKIP_FILE,
   Modules,
 } from "@medusajs/framework/utils"
-
+import TranslationFeatureFlag from "../../../../../medusa/src/feature-flags/translation"
 export const StoreLocales: ModuleJoinerConfig = {
   [MEDUSA_SKIP_FILE]: !(
-    FeatureFlag.isFeatureEnabled("translation") ||
+    FeatureFlag.isFeatureEnabled(TranslationFeatureFlag.key) ||
     process.env.MEDUSA_FF_TRANSLATION === "true"
   ),
   isLink: true,

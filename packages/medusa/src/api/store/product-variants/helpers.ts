@@ -10,6 +10,7 @@ import {
 } from "@medusajs/framework/utils"
 import { StoreRequestWithContext } from "../types"
 import { applyTranslationsToTaxLines } from "@medusajs/framework/utils"
+import TranslationFeatureFlag from "../../../feature-flags/translation"
 
 export const wrapVariantsWithTaxPrices = async <T>(
   req: StoreRequestWithContext<T>,
@@ -41,7 +42,9 @@ export const wrapVariantsWithTaxPrices = async <T>(
     req.taxContext.taxLineContext
   )) as unknown as ItemTaxLineDTO[]
 
-  const isTranslationEnabled = FeatureFlag.isFeatureEnabled("translation")
+  const isTranslationEnabled = FeatureFlag.isFeatureEnabled(
+    TranslationFeatureFlag.key
+  )
   if (isTranslationEnabled) {
     taxLines = (await applyTranslationsToTaxLines(
       taxLines,

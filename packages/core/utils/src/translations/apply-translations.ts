@@ -2,6 +2,7 @@ import { MedusaContainer, RemoteQueryFunction } from "@medusajs/types"
 import { ContainerRegistrationKeys } from "../common/container"
 import { isObject } from "../common/is-object"
 import { FeatureFlag } from "../feature-flags/flag-router"
+import TranslationFeatureFlag from "../../../../medusa/src/feature-flags/translation"
 
 const excludedKeys = [
   "id",
@@ -70,7 +71,9 @@ export async function applyTranslations({
   objects: Record<string, any>[]
   container: MedusaContainer
 }) {
-  const isTranslationEnabled = FeatureFlag.isFeatureEnabled("translation")
+  const isTranslationEnabled = FeatureFlag.isFeatureEnabled(
+    TranslationFeatureFlag.key
+  )
 
   if (!isTranslationEnabled) {
     return

@@ -6,6 +6,7 @@ import {
   StepResponse,
 } from "@medusajs/framework/workflows-sdk"
 import { applyTranslationsToItems } from "../utils/apply-translations-to-items"
+import TranslationFeatureFlag from "../../../../../medusa/src/feature-flags/translation"
 
 export interface GetTranslatedLineItemsStepInput<T> {
   items: T[] | undefined
@@ -18,7 +19,9 @@ export const getTranslatedLineItemsStepId = "get-translated-line-items"
 const step = createStep(
   getTranslatedLineItemsStepId,
   async (data: GetTranslatedLineItemsStepInput<any>, { container }) => {
-    const isTranslationEnabled = FeatureFlag.isFeatureEnabled("translation")
+    const isTranslationEnabled = FeatureFlag.isFeatureEnabled(
+      TranslationFeatureFlag.key
+    )
 
     if (!isTranslationEnabled || !data.locale || !data.items?.length) {
       return new StepResponse(data.items ?? [])
@@ -43,6 +46,5 @@ const step = createStep(
  */
 export const getTranslatedLineItemsStep = <T>(
   data: GetTranslatedLineItemsStepInput<T>
-): ReturnType<StepFunction<any, T[]>> => step(data) as unknown as ReturnType<
-  StepFunction<any, T[]>
->
+): ReturnType<StepFunction<any, T[]>> =>
+  step(data) as unknown as ReturnType<StepFunction<any, T[]>>
