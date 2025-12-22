@@ -59,13 +59,6 @@ export const updateOrderTaxLinesTranslationsStep = createStep(
       container,
     })
 
-    orderModuleService.upsertOrderLineItemTaxLines(
-      translatedItemsTaxRates.map((taxRate) => ({
-        id: taxRate.tax_line_id,
-        description: taxRate.name,
-      }))
-    )
-
     const translatedShippingMethodsTaxRates =
       originalShippingMethodsTaxLines.map((taxLine) => ({
         id: taxLine.tax_rate_id,
@@ -79,12 +72,20 @@ export const updateOrderTaxLinesTranslationsStep = createStep(
       container,
     })
 
-    orderModuleService.upsertOrderShippingMethodTaxLines(
-      translatedShippingMethodsTaxRates.map((taxRate) => ({
-        id: taxRate.tax_line_id,
-        description: taxRate.name,
-      }))
-    )
+    await Promise.all([
+      orderModuleService.upsertOrderLineItemTaxLines(
+        translatedItemsTaxRates.map((taxRate) => ({
+          id: taxRate.tax_line_id,
+          description: taxRate.name,
+        }))
+      ),
+      orderModuleService.upsertOrderShippingMethodTaxLines(
+        translatedShippingMethodsTaxRates.map((taxRate) => ({
+          id: taxRate.tax_line_id,
+          description: taxRate.name,
+        }))
+      ),
+    ])
 
     return new StepResponse(void 0, [
       originalItemTaxLines,
@@ -100,18 +101,19 @@ export const updateOrderTaxLinesTranslationsStep = createStep(
 
     const orderModuleService = container.resolve(Modules.ORDER)
 
-    await orderModuleService.upsertOrderLineItemTaxLines(
-      originalItemTaxLines.map((taxLine) => ({
-        id: taxLine.id,
-        description: taxLine.description,
-      }))
-    )
-
-    await orderModuleService.upsertOrderShippingMethodTaxLines(
-      originalShippingMethodsTaxLines.map((taxLine) => ({
-        id: taxLine.id,
-        description: taxLine.description,
-      }))
-    )
+    await Promise.all([
+      orderModuleService.upsertOrderLineItemTaxLines(
+        originalItemTaxLines.map((taxLine) => ({
+          id: taxLine.id,
+          description: taxLine.description,
+        }))
+      ),
+      orderModuleService.upsertOrderShippingMethodTaxLines(
+        originalShippingMethodsTaxLines.map((taxLine) => ({
+          id: taxLine.id,
+          description: taxLine.description,
+        }))
+      ),
+    ])
   }
 )
