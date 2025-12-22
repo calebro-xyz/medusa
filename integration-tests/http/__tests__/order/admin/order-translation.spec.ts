@@ -459,8 +459,8 @@ medusaIntegrationTestRunner({
         })
       })
 
-      describe.only("Tax line translations", () => {
-        it.only("should translate tax line descriptions when order locale is updated", async () => {
+      describe("Tax line translations", () => {
+        it("should translate tax line descriptions when order locale is updated", async () => {
           // Create order with French locale
           const order = await createOrderFromCart("fr-FR")
 

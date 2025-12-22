@@ -27,7 +27,7 @@ import {
   updateOrdersStep,
 } from "../steps"
 import { throwIfOrderIsCancelled } from "../utils/order-validation"
-import { updateOrderTaxLinesWorkflow } from "./update-tax-lines"
+import { updateOrderTaxLinesTranslationsStep } from "../steps/update-order-tax-lines-translations"
 
 /**
  * The data to validate the order update.
@@ -263,21 +263,10 @@ export const updateOrderWorkflow = createWorkflow(
     when("locale-changed", { input, order }, ({ input, order }) => {
       return !!input.locale && input.locale !== order.locale
     }).then(() => {
-      //TODO: Check why i end up with duplicated tax lines, for the previous and next locale
-      // seems something could be wrong with setTaxLinesForItemsStep upsert never including ids
-      const { data: order } = useQueryGraphStep({
-        entity: "order",
-        filters: { id: input.id },
-        fields: ["shipping_address.*"],
-        options: { isList: false },
-      }).config({ name: "query-order" })
       parallelize(
-        updateOrderTaxLinesWorkflow.runAsStep({
-          input: {
-            order_id: input.id,
-            shipping_address: order.shipping_address,
-            force_tax_calculation: true,
-          },
+        updateOrderTaxLinesTranslationsStep({
+          order_id: input.id,
+          locale: input.locale!,
         }),
         updateOrderItemsTranslationsStep({
           order_id: input.id,
