@@ -53,6 +53,7 @@ export const AiAssistantChatWindow = () => {
             content: item.question,
             sources: item.sources,
             question_id: item.id,
+            isGenerationAborted: item.isGenerationAborted,
           }}
         />
         <AiAssistantThreadItem
@@ -61,6 +62,7 @@ export const AiAssistantChatWindow = () => {
             content: item.answer,
             sources: item.sources,
             question_id: item.id,
+            isGenerationAborted: item.isGenerationAborted,
           }}
         />
       </Fragment>
