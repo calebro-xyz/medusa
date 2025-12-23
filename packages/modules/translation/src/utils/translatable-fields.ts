@@ -11,6 +11,7 @@ export const PRODUCT_CATEGORY_TRANSLATABLE_FIELDS = ["name", "description"]
 export const PRODUCT_TAG_TRANSLATABLE_FIELDS = ["value"]
 export const PRODUCT_OPTION_TRANSLATABLE_FIELDS = ["title"]
 export const PRODUCT_OPTION_VALUE_TRANSLATABLE_FIELDS = ["value"]
+export const TAX_RATE_TRANSLATABLE_FIELDS = ["name"]
 
 // export const SHIPPING_OPTION_TRANSLATABLE_FIELDS = ["name"]
 // export const SHIPPING_OPTION_TYPE_TRANSLATABLE_FIELDS = ["label", "description"]
@@ -30,6 +31,7 @@ export const translatableFieldsConfig = {
   product_tag: PRODUCT_TAG_TRANSLATABLE_FIELDS,
   product_option: PRODUCT_OPTION_TRANSLATABLE_FIELDS,
   product_option_value: PRODUCT_OPTION_VALUE_TRANSLATABLE_FIELDS,
+  tax_rate: TAX_RATE_TRANSLATABLE_FIELDS,
 
   // shipping_option: SHIPPING_OPTION_TRANSLATABLE_FIELDS,
   // shipping_option_type: SHIPPING_OPTION_TYPE_TRANSLATABLE_FIELDS,
