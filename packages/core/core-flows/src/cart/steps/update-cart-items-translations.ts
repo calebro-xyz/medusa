@@ -14,7 +14,6 @@ import {
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 import { applyTranslationsToItems } from "../../common/utils/apply-translations-to-items"
 import { productVariantsFields } from "../utils/fields"
-import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 
 export interface UpdateCartItemsTranslationsStepInput {
   cart_id: string
@@ -83,9 +82,7 @@ export const updateCartItemsTranslationsStep = createStep(
   async (data: UpdateCartItemsTranslationsStepInput, { container }) => {
     const originalItems: ItemTranslationSnapshot[] = []
     try {
-      const isTranslationEnabled = FeatureFlag.isFeatureEnabled(
-        TranslationFeatureFlag.key
-      )
+      const isTranslationEnabled = FeatureFlag.isFeatureEnabled("translation")
 
       if (!isTranslationEnabled) {
         return new StepResponse(void 0, [])

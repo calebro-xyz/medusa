@@ -4,7 +4,6 @@ import {
   FeatureFlag,
 } from "@medusajs/framework/utils"
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
-import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 export const getTranslatedTaxLinesStepId = "get-translated-tax-lines-step"
 
 export interface GetTranslatedTaxLinesStepInput {
@@ -19,9 +18,7 @@ export const getTranslatedTaxLinesStep = createStep(
     { itemTaxLines, shippingTaxLines, locale }: GetTranslatedTaxLinesStepInput,
     { container }
   ) => {
-    const isTranslationEnabled = FeatureFlag.isFeatureEnabled(
-      TranslationFeatureFlag.key
-    )
+    const isTranslationEnabled = FeatureFlag.isFeatureEnabled("translation")
 
     if (!isTranslationEnabled) {
       return new StepResponse({

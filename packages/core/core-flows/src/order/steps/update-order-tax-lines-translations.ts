@@ -5,7 +5,6 @@ import {
   FeatureFlag,
   Modules,
 } from "@medusajs/framework/utils"
-import TranslationFeatureFlag from "@medusajs/medusa/feature-flags/translation"
 
 export const updateOrderTaxLinesTranslationsStepId =
   "update-order-tax-lines-translations"
@@ -20,9 +19,7 @@ export const updateOrderTaxLinesTranslationsStep = createStep(
   async (data: UpdateOrderTaxLinesTranslationsStepInput, { container }) => {
     const query = container.resolve(ContainerRegistrationKeys.QUERY)
 
-    const isTranslationEnabled = FeatureFlag.isFeatureEnabled(
-      TranslationFeatureFlag.key
-    )
+    const isTranslationEnabled = FeatureFlag.isFeatureEnabled("translation")
 
     if (!isTranslationEnabled || !data.locale) {
       return new StepResponse(void 0, [])
