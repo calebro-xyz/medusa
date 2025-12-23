@@ -32,6 +32,7 @@ export type AiAssistantThreadItem = {
   content: string
   question_id?: string | null
   sources?: Source[]
+  isGenerationAborted?: boolean
 }
 
 const AiAssistantContext = createContext<AiAssistantContextType | null>(null)

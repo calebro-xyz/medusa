@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useRef } from "react"
 import clsx from "clsx"
-import { ArrowUpCircleSolid, LightBulb, LightBulbSolid } from "@medusajs/icons"
+import {
+  ArrowUpCircleSolid,
+  LightBulb,
+  LightBulbSolid,
+  StopCircleSolid,
+} from "@medusajs/icons"
 import {
   useAiAssistant,
   useAnalytics,
@@ -20,7 +25,7 @@ export const AiAssistantChatWindowInput = ({
 }: AiAssistantChatWindowInputProps) => {
   const { chatOpened, inputRef, loading, setChatOpened, isCaptchaLoaded } =
     useAiAssistant()
-  const { submitQuery, conversation } = useChat()
+  const { submitQuery, conversation, stopGeneration } = useChat()
   const { track } = useAnalytics()
   const { active, toggle } = useDeepThinking()
   const { isBrowser } = useIsBrowser()
@@ -43,6 +48,12 @@ export const AiAssistantChatWindowInput = ({
     overrideQuestion?: string
   ) => {
     e?.preventDefault()
+    if (loading) {
+      // stop the generation
+      stopGeneration()
+      return
+    }
+
     submitQuery(overrideQuestion || question)
     if (!conversation.length) {
       track({
@@ -206,10 +217,10 @@ export const AiAssistantChatWindowInput = ({
               "appearance-none p-0 text-medusa-fg-base disabled:text-medusa-fg-disabled",
               "transition-colors"
             )}
-            disabled={!question || loading || !isCaptchaLoaded}
+            disabled={!isCaptchaLoaded || (!question && !loading)}
             type="submit"
           >
-            <ArrowUpCircleSolid />
+            {loading ? <StopCircleSolid /> : <ArrowUpCircleSolid />}
           </button>
         </div>
       </form>

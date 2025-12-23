@@ -25,6 +25,13 @@ export const AiAssistantThreadItem = ({ item }: AiAssistantThreadItemProps) => {
 
     return !item.question_id && item.content.length === 0
   }, [item, error])
+  if (
+    item.isGenerationAborted &&
+    item.type === "answer" &&
+    !item.content.length
+  ) {
+    return null
+  }
   return (
     <div
       className={clsx(
