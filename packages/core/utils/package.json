@@ -26,6 +26,7 @@
   "author": "Medusa",
   "license": "MIT",
   "devDependencies": {
+    "@medusajs/medusa": "2.12.3",
     "@medusajs/types": "2.12.3",
     "express": "^4.21.0"
   },
@@ -47,6 +48,7 @@
     "zod": "3.25.76"
   },
   "peerDependencies": {
+    "@medusajs/medusa": "2.12.3",
     "express": "^4.21.0"
   },
   "scripts": {

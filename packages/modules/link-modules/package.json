@@ -34,9 +34,11 @@
   },
   "devDependencies": {
     "@medusajs/framework": "2.12.3",
+    "@medusajs/medusa": "2.12.3",
     "@medusajs/test-utils": "2.12.3"
   },
   "peerDependencies": {
-    "@medusajs/framework": "2.12.3"
+    "@medusajs/framework": "2.12.3",
+    "@medusajs/medusa": "2.12.3"
   }
 }

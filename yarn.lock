@@ -3408,11 +3408,13 @@ __metadata:
   resolution: "@medusajs/core-flows@workspace:packages/core/core-flows"
   dependencies:
     "@medusajs/framework": 2.12.3
+    "@medusajs/medusa": 2.12.3
     csv-parse: ^5.6.0
     json-2-csv: ^5.5.4
     zod: 3.25.76
   peerDependencies:
     "@medusajs/framework": 2.12.3
+    "@medusajs/medusa": 2.12.3
   languageName: unknown
   linkType: soft
 
@@ -3734,9 +3736,11 @@ __metadata:
   resolution: "@medusajs/link-modules@workspace:packages/modules/link-modules"
   dependencies:
     "@medusajs/framework": 2.12.3
+    "@medusajs/medusa": 2.12.3
     "@medusajs/test-utils": 2.12.3
   peerDependencies:
     "@medusajs/framework": 2.12.3
+    "@medusajs/medusa": 2.12.3
   languageName: unknown
   linkType: soft
 
@@ -4231,6 +4235,7 @@ __metadata:
     "@graphql-tools/merge": ^9.0.7
     "@graphql-tools/schema": ^10.0.6
     "@medusajs/deps": 2.12.3
+    "@medusajs/medusa": 2.12.3
     "@medusajs/types": 2.12.3
     "@types/pluralize": ^0.0.33
     bignumber.js: ^9.1.2
@@ -4244,6 +4249,7 @@ __metadata:
     ulid: ^2.3.0
     zod: 3.25.76
   peerDependencies:
+    "@medusajs/medusa": 2.12.3
     express: ^4.21.0
   languageName: unknown
   linkType: soft
