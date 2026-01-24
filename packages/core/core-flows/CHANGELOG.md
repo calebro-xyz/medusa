@@ -1,5 +1,14 @@
 # @medusajs/core-flows
 
+## 2.13.1
+
+### Patch Changes
+
+- [#14511](https://github.com/medusajs/medusa/pull/14511) [`2e2fad6c62a51373f97adcd06941f9182657d9d0`](https://github.com/medusajs/medusa/commit/2e2fad6c62a51373f97adcd06941f9182657d9d0) Thanks [@fPolic](https://github.com/fPolic)! - fix(core-flows): recompute adjustments changes are added in some draft order flows
+
+- Updated dependencies []:
+  - @medusajs/framework@2.13.1
+
 ## 2.13.0
 
 ### Minor Changes

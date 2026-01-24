@@ -1,5 +1,65 @@
 # Change Log
 
+## 2.13.1
+
+### Patch Changes
+
+- [#14612](https://github.com/medusajs/medusa/pull/14612) [`de08ea732b599374a071c016fa8af2e4f3e31075`](https://github.com/medusajs/medusa/commit/de08ea732b599374a071c016fa8af2e4f3e31075) Thanks [@shahednasser](https://github.com/shahednasser)! - fix(medusa): use http type for batch translation settings request
+
+- Updated dependencies [[`2e2fad6c62a51373f97adcd06941f9182657d9d0`](https://github.com/medusajs/medusa/commit/2e2fad6c62a51373f97adcd06941f9182657d9d0)]:
+  - @medusajs/core-flows@2.13.1
+  - @medusajs/analytics@2.13.1
+  - @medusajs/api-key@2.13.1
+  - @medusajs/auth@2.13.1
+  - @medusajs/caching@2.13.1
+  - @medusajs/cart@2.13.1
+  - @medusajs/currency@2.13.1
+  - @medusajs/customer@2.13.1
+  - @medusajs/file@2.13.1
+  - @medusajs/fulfillment@2.13.1
+  - @medusajs/index@2.13.1
+  - @medusajs/inventory@2.13.1
+  - @medusajs/link-modules@2.13.1
+  - @medusajs/locking@2.13.1
+  - @medusajs/notification@2.13.1
+  - @medusajs/order@2.13.1
+  - @medusajs/payment@2.13.1
+  - @medusajs/pricing@2.13.1
+  - @medusajs/product@2.13.1
+  - @medusajs/promotion@2.13.1
+  - @medusajs/region@2.13.1
+  - @medusajs/sales-channel@2.13.1
+  - @medusajs/settings@2.13.1
+  - @medusajs/stock-location@2.13.1
+  - @medusajs/store@2.13.1
+  - @medusajs/tax@2.13.1
+  - @medusajs/translation@2.13.1
+  - @medusajs/user@2.13.1
+  - @medusajs/workflow-engine-inmemory@2.13.1
+  - @medusajs/workflow-engine-redis@2.13.1
+  - @medusajs/draft-order@2.13.1
+  - @medusajs/admin-bundler@2.13.1
+  - @medusajs/framework@2.13.1
+  - @medusajs/telemetry@2.13.1
+  - @medusajs/cache-inmemory@2.13.1
+  - @medusajs/cache-redis@2.13.1
+  - @medusajs/event-bus-local@2.13.1
+  - @medusajs/event-bus-redis@2.13.1
+  - @medusajs/analytics-local@2.13.1
+  - @medusajs/analytics-posthog@2.13.1
+  - @medusajs/auth-emailpass@2.13.1
+  - @medusajs/auth-github@2.13.1
+  - @medusajs/auth-google@2.13.1
+  - @medusajs/caching-redis@2.13.1
+  - @medusajs/file-local@2.13.1
+  - @medusajs/file-s3@2.13.1
+  - @medusajs/fulfillment-manual@2.13.1
+  - @medusajs/locking-postgres@2.13.1
+  - @medusajs/locking-redis@2.13.1
+  - @medusajs/notification-local@2.13.1
+  - @medusajs/notification-sendgrid@2.13.1
+  - @medusajs/payment-stripe@2.13.1
+
 ## 2.13.0
 
 ### Minor Changes
